@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    tools:context=".ShowTags.TagDetailActivity">
+
+    <!-- ToolBar View -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:id="@+id/list_tags_ll"
+        android:background="@color/tagColor5"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="top"
+            android:scaleType="fitCenter"
+            app:tint="@color/white"
+            android:background="@null"
+            android:contentDescription="Back Button"
+            android:src="@drawable/left_arrow" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tag_name_title_tv"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="40dp"
+            android:layout_gravity="bottom|center"
+            android:textAlignment="center"
+            android:text="List Of Tags"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColor="@color/colorOneDark"
+        android:text="Edit description"/>
+
+    <EditText
+        android:id="@+id/et_add_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:textColorHint="@color/colorTwoLight"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/colorOneDark"
+        android:backgroundTint="@color/colorTwoLight" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/colorOneDark"
+        android:text="Edit background color"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_tag_color1"
+            android:tag="10"
+            android:backgroundTint="@color/colorOneLight"/>
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_tag_color2"
+            android:tag="20"
+            android:backgroundTint="@color/tagColor2"/>
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_tag_color3"
+            android:tag="30"
+            android:backgroundTint="@color/tagColor3"/>
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_tag_color4"
+            android:tag="40"
+            android:backgroundTint="@color/tagColor4"/>
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_tag_color5"
+            android:tag="50"
+            android:backgroundTint="@color/tagColor5"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_weight="1"
+            android:id="@+id/view_selected_1"
+            android:visibility="invisible"
+            android:background="@color/colorButton"/>
+        <View
+            android:layout_width="20dp"
+            android:layout_height="match_parent"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_weight="1"
+            android:id="@+id/view_selected_2"
+            android:visibility="invisible"
+            android:background="@color/colorButton"/>
+        <View
+            android:layout_width="20dp"
+            android:layout_height="match_parent"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_weight="1"
+            android:id="@+id/view_selected_3"
+            android:visibility="invisible"
+            android:background="@color/colorButton"/>
+        <View
+            android:layout_width="20dp"
+            android:layout_height="match_parent"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_weight="1"
+            android:id="@+id/view_selected_4"
+            android:visibility="invisible"
+            android:background="@color/colorButton"/>
+        <View
+            android:layout_width="20dp"
+            android:layout_height="match_parent"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_weight="1"
+            android:id="@+id/view_selected_5"
+            android:visibility="invisible"
+            android:background="@color/colorButton"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:id="@+id/btn_discard_changes"
+            android:text="DISCARD"
+            android:backgroundTint="#c299b0"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:id="@+id/btn_update_tag"
+            android:text="UPDATE TAG"
+            android:backgroundTint="@color/colorButton"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="20dp"
+        android:background="@color/colorTwoDark"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:id="@+id/tag_details_recyclerView"/>
+
+</LinearLayout>

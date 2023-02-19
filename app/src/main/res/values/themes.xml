@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.TagIt" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorTwoLight</item>
+        <item name="colorPrimaryVariant">@color/colorOneLight</item>
+        <item name="colorOnPrimary">@color/colorTwoDark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorTwoLight</item>
+        <item name="colorSecondaryVariant">@color/colorTwoDark</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/colorButton</item>
+        <item name="colorPrimary">@color/colorTwoLight</item>
+        <item name="android:textColorPrimary">@color/colorOneDark</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+    </style>
+
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorOneDark">#54594E</color>
+    <color name="colorOneLight">#78AD92</color> <!-- Tag color 1 -->
+    <color name="colorTwoDark">#DAD4AF</color>
+    <color name="colorTwoLight">#A1B59F</color>
+    <color name="colorButton">#AD7893</color>
+    <color name="tagColor2">#A0C3D2</color>  <!-- Tag color 2 -->
+    <color name="tagColor3">#78ADAC</color> <!-- Tag color 3 -->
+    <color name="tagColor4">#7893AD</color> <!-- Tag color 4 -->
+    <color name="tagColor5">#9278AD</color> <!-- Tag color 5 -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorBackground">#F7F6ED</color>
+</resources>
