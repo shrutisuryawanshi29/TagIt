@@ -88,11 +88,11 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList<TagModel> fetchTagFromDate(String ed) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("select * from " + eventsTable + " WHERE "+ eventDate+ " = '"+ed+"'", null);
+        Cursor cursor = db.rawQuery("select e.TagName, t.TagColor from " + eventsTable + " as e, " + tagTable + " as t WHERE e."+ eventDate+ " = '"+ed+"' and e."+eventTagName + " = t."+ tagName , null);
         ArrayList<TagModel> tagModels = new ArrayList<>();
         if(cursor.moveToFirst()) {
             do {
-                tagModels.add(new TagModel(cursor.getString(2),"", "78AD92"));
+                tagModels.add(new TagModel(cursor.getString(0),"", cursor.getString(1)));
             }while(cursor.moveToNext());
         }
         cursor.close();
