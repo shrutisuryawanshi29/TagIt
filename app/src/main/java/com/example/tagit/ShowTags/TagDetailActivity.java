@@ -2,6 +2,7 @@ package com.example.tagit.ShowTags;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -19,9 +20,13 @@ import com.example.tagit.Database.DBHandler;
 import com.example.tagit.Models.TagEventsModel;
 import com.example.tagit.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class TagDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -83,21 +88,42 @@ public class TagDetailActivity extends AppCompatActivity implements View.OnClick
 
     void fetchTagDetails() {
         tagEventsModelArrayList = dbHandler.fetchAllDataFromTagEventsTable(selectedTagName);
+        Collections.sort(tagEventsModelArrayList, new Comparator<TagEventsModel>() {
+            DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+            @Override
+            public int compare(TagEventsModel tagEventsModel, TagEventsModel t1) {
+                try {
+                    return f.parse(tagEventsModel.getEventDate()).compareTo(f.parse(t1.getEventDate()));
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     void setDataForViews() {
         tagNameTitleTv.setText(selectedTagName);
+
+        // handled this condition if data in tag table but event not added
+        // it returns empty as we have used two tables
         if (tagEventsModelArrayList.size() > 0) {
             setDyanamicStatusBarColor(tagEventsModelArrayList.get(0).getTagColor());
             listTagsLL.setBackgroundColor(Color.parseColor("#" + tagEventsModelArrayList.get(0).getTagColor()));
             addDescriptionET.setText(tagEventsModelArrayList.get(0).getTagDescription());
             int position = Arrays.asList(colorArray).indexOf(tagEventsModelArrayList.get(0).getTagColor());
             setValuesInSelectedArray(position);
+            setAdapterData();
         } else {
             setDyanamicStatusBarColor(colorArray[0]);
             listTagsLL.setBackgroundColor(Color.parseColor("#" + colorArray[0]));
             setValuesInSelectedArray(0);
         }
+    }
+
+    void setAdapterData() {
+        ShowEventAdapter showEventAdapter = new ShowEventAdapter(tagEventsModelArrayList);
+        tag_details_recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        tag_details_recyclerView.setAdapter(showEventAdapter);
     }
 
     void setDyanamicStatusBarColor(String tagColor) {
