@@ -9,6 +9,11 @@
     <color name="tagColor3">#78ADAC</color> <!-- Tag color 3 -->
     <color name="tagColor4">#7893AD</color> <!-- Tag color 4 -->
     <color name="tagColor5">#9278AD</color> <!-- Tag color 5 -->
+    <color name="tagColor6">#C3B091</color> <!-- Tag color 6 -->
+    <color name="tagColor7">#EAC7C7</color> <!-- Tag color 7 -->
+    <color name="tagColor8">#DBC970</color> <!-- Tag color 8 -->
+    <color name="tagColor9">#E6BA95</color> <!-- Tag color 9 -->
+    <color name="tagColor10">#FFAB91</color> <!-- Tag color 10 -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorBackground">#F7F6ED</color>
