@@ -2,13 +2,16 @@ package com.example.tagit.AddTag;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +29,7 @@ public class AddTagDialog extends Dialog implements View.OnClickListener, OnTagC
     ArrayList<TagModel> tagModelArrayList = new ArrayList<>();
     RecyclerView listOfTagsRV;
     String selectedDate;
+    AddTagAdapter addTagAdapter;
 
     public AddTagDialog(Activity a, String selectedDate) {
         super(a);
@@ -45,9 +49,9 @@ public class AddTagDialog extends Dialog implements View.OnClickListener, OnTagC
 
         saveBtn.setOnClickListener(view -> {
             String tagName = addTagEt.getText().toString();
-            if (!tagName.isEmpty()) {
+            if (!tagName.isEmpty() && !checkIfDataAlreadyExist(tagName)) {
                 dbHandler.addNewTagIntoTable(tagName.trim(), "", "78AD92");
-                dismiss();
+                Toast.makeText(activity, "Tag Created!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -55,8 +59,15 @@ public class AddTagDialog extends Dialog implements View.OnClickListener, OnTagC
         setAdapterData();
     }
 
+    boolean checkIfDataAlreadyExist(String tn) {
+        for(TagModel tagModel: tagModelArrayList) {
+            if (tagModel.getTagName().equals(tn)) return true;
+        }
+        return false;
+    }
+
     public void setAdapterData() {
-        AddTagAdapter addTagAdapter = new AddTagAdapter(this, tagModelArrayList);
+        addTagAdapter = new AddTagAdapter(this, tagModelArrayList);
         listOfTagsRV.setLayoutManager(new LinearLayoutManager(activity));
         listOfTagsRV.setAdapter(addTagAdapter);
     }
@@ -66,9 +77,36 @@ public class AddTagDialog extends Dialog implements View.OnClickListener, OnTagC
         dismiss();
     }
 
+    void showAlertDialog(int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setMessage("Are you sure you want to delete the tag '"+tagModelArrayList.get(position).getTagName()+"' and all the events associated with tag?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dbHandler.deleteTag(tagModelArrayList.get(position).getTagName());
+                        tagModelArrayList.remove(position);
+                        addTagAdapter.notifyItemRemoved(position);
+                        Toast.makeText(activity, "Tag Deleted!", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
     @Override
     public void onClickOfTag(int position) {
         dbHandler.addNewEventIntoTable(selectedDate, tagModelArrayList.get(position).getTagName());
         dismiss();
+    }
+
+    @Override
+    public void onDeleteOfTag(int position) {
+        showAlertDialog(position);
     }
 }

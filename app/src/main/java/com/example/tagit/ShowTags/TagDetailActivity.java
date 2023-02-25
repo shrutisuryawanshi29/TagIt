@@ -13,8 +13,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tagit.Database.DBHandler;
 import com.example.tagit.Models.TagEventsModel;
@@ -39,6 +41,7 @@ public class TagDetailActivity extends AppCompatActivity implements View.OnClick
     Button tagColor6Btn, tagColor7Btn, tagColor8Btn, tagColor9Btn, tagColor10Btn;
     View view_selected_6, view_selected_7, view_selected_8, view_selected_9, view_selected_10;
     Button discardChangesBtn, updateTagBtn;
+    ImageButton backBtn;
     RecyclerView tag_details_recyclerView;
     DBHandler dbHandler;
     ArrayList<TagEventsModel> tagEventsModelArrayList = new ArrayList<>();
@@ -77,6 +80,7 @@ public class TagDetailActivity extends AppCompatActivity implements View.OnClick
         tagColor10Btn = findViewById(R.id.btn_tag_color10);
         discardChangesBtn = findViewById(R.id.btn_discard_changes);
         updateTagBtn = findViewById(R.id.btn_update_tag);
+        backBtn = findViewById(R.id.back_btn_tag_detail);
         tag_details_recyclerView = findViewById(R.id.tag_details_recyclerView);
         view_selected_1 = findViewById(R.id.view_selected_1);
         view_selected_2 = findViewById(R.id.view_selected_2);
@@ -101,6 +105,7 @@ public class TagDetailActivity extends AppCompatActivity implements View.OnClick
         tagColor10Btn.setOnClickListener(this);
         discardChangesBtn.setOnClickListener(this);
         updateTagBtn.setOnClickListener(this);
+        backBtn.setOnClickListener(this);
 
     }
 
@@ -207,6 +212,10 @@ public class TagDetailActivity extends AppCompatActivity implements View.OnClick
             case R.id.btn_update_tag:
                 updateTagTable();
                 break;
+
+            case R.id.back_btn_tag_detail:
+                finish();
+                break;
         }
     }
 
@@ -239,5 +248,6 @@ public class TagDetailActivity extends AppCompatActivity implements View.OnClick
         int colorIndex = gtIndexOfColor();
         String color = colorArray[colorIndex];
         dbHandler.updateValuesInTagTable(selectedTagName, desc, color);
+        Toast.makeText(getApplicationContext(), "Tag details updated successfully!", Toast.LENGTH_SHORT).show();
     }
 }

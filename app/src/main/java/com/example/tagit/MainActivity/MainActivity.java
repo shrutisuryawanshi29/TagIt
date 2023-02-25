@@ -1,11 +1,13 @@
 package com.example.tagit.MainActivity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,7 @@ import android.widget.CalendarView;
 
 import com.example.tagit.AddTag.AddTagAdapter;
 import com.example.tagit.AddTag.AddTagDialog;
+import com.example.tagit.AddTag.OnTagClickListener;
 import com.example.tagit.Database.DBHandler;
 import com.example.tagit.Models.EventsModel;
 import com.example.tagit.Models.TagModel;
@@ -27,7 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnTagClickListener {
 
     CalendarView calendarView;
     RecyclerView recyclerView;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     String selectedDate;
     DBHandler dbHandler;
     ArrayList<TagModel> eventsModelArrayList = new ArrayList<>();
+    AddTagAdapter addTagAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +89,38 @@ public class MainActivity extends AppCompatActivity {
     void setCalenderData(){
         eventsModelArrayList = dbHandler.fetchTagFromDate(selectedDate);
 
-        AddTagAdapter addTagAdapter = new AddTagAdapter(null, eventsModelArrayList);
+        addTagAdapter = new AddTagAdapter(this, eventsModelArrayList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(addTagAdapter);
+    }
+
+    void showAlertDialog(int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete this event associated with '"+eventsModelArrayList.get(position).getTagName()+"' tag?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dbHandler.deleteEvent(selectedDate, eventsModelArrayList.get(position).getTagName());
+                        eventsModelArrayList.remove(position);
+                        addTagAdapter.notifyItemRemoved(position);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    @Override
+    public void onClickOfTag(int position) {
+
+    }
+
+    @Override
+    public void onDeleteOfTag(int position) {
+        showAlertDialog(position);
     }
 }

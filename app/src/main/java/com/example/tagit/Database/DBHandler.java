@@ -126,6 +126,21 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void deleteEvent(String ed, String etn) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(eventsTable, "EventDate=? and TagName=?", new String[]{ed,etn});
+        db.close();
+    }
+
+    public void deleteTag(String tn) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(tagTable, "TagName=?", new String[]{tn});
+        db.delete(eventsTable, "TagName=?", new String[]{tn});
+        db.close();
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + tagTable);

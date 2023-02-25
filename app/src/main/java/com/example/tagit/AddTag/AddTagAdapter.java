@@ -5,7 +5,9 @@ import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,6 +45,10 @@ public class AddTagAdapter extends RecyclerView.Adapter<AddTagAdapter.TagViewHol
         holder.tagNameTv.setOnClickListener(view -> {
             listener.onClickOfTag(position);
         });
+
+        holder.deleteBtn.setOnClickListener(view -> {
+            listener.onDeleteOfTag(position);
+        });
     }
 
     @Override
@@ -52,14 +58,17 @@ public class AddTagAdapter extends RecyclerView.Adapter<AddTagAdapter.TagViewHol
 
     public class TagViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayout tagNameLL;
+        RelativeLayout tagNameLL;
         TextView tagNameTv;
         View view;
+        ImageButton deleteBtn;
 
         public TagViewHolder(@NonNull View itemView) {
             super(itemView);
             tagNameTv = itemView.findViewById(R.id.tag_name_tv);
             tagNameLL = itemView.findViewById(R.id.tag_name_ll);
+            deleteBtn = itemView.findViewById(R.id.delete_btn);
+
             view = itemView;
         }
     }
