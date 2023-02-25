@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Tag !"
+        android:text="Create a Tag !"
         android:gravity="center"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Or add from existing tags!"
+        android:text="Click to create event for a tag!"
         android:textColor="@color/colorOneDark"
         android:textStyle="bold"
         android:textSize="14sp"

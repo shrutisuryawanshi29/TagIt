@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -23,8 +26,10 @@ public class AllTagsListActivity extends AppCompatActivity implements OnTagClick
 
     RecyclerView tagsRecyclerView;
     ArrayList<TagModel> tagModelArrayList = new ArrayList<>();
+    ArrayList<TagModel> temp = new ArrayList<>(); // to show filtered list after search
     DBHandler dbHandler;
     ImageButton backBtnListTags;
+    EditText searchTextET;
 
     AddTagAdapter addTagAdapter;
 
@@ -36,17 +41,46 @@ public class AllTagsListActivity extends AppCompatActivity implements OnTagClick
         dbHandler = new DBHandler(this);
         tagsRecyclerView = findViewById(R.id.list_tags_recycler_view);
         backBtnListTags = findViewById(R.id.back_btn_list_tags);
+        searchTextET = findViewById(R.id.search_tags_et);
 
         backBtnListTags.setOnClickListener(view -> {
             finish();
         });
 
+        searchTextET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filterList(editable.toString());
+            }
+        });
+
         setAdapterData();
+    }
+
+    void filterList(String editable) {
+        temp.clear();
+        for (TagModel t: tagModelArrayList) {
+            if (t.getTagName().toLowerCase().contains(editable.toLowerCase())) temp.add(t);
+        }
+
+        addTagAdapter.updateList(temp);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        searchTextET.setText(null);
+        searchTextET.clearFocus();
         setAdapterData();
     }
 
@@ -82,7 +116,12 @@ public class AllTagsListActivity extends AppCompatActivity implements OnTagClick
     @Override
     public void onClickOfTag(int position) {
         Intent intent = new Intent(this, TagDetailActivity.class);
-        intent.putExtra("selectedTagName", tagModelArrayList.get(position).getTagName());
+
+        if (temp.size()>0) // if click on filtered list
+            intent.putExtra("selectedTagName", temp.get(position).getTagName());
+        else
+            intent.putExtra("selectedTagName", tagModelArrayList.get(position).getTagName());
+
         startActivity(intent);
     }
 

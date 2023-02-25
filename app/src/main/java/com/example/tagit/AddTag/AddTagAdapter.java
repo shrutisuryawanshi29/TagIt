@@ -56,6 +56,11 @@ public class AddTagAdapter extends RecyclerView.Adapter<AddTagAdapter.TagViewHol
         return tagModelArrayList.size();
     }
 
+    public void updateList(ArrayList<TagModel> temp) {
+        tagModelArrayList = temp;
+        notifyDataSetChanged();
+    }
+
     public class TagViewHolder extends RecyclerView.ViewHolder {
 
         RelativeLayout tagNameLL;

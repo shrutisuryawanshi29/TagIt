@@ -55,7 +55,7 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put(tagDescription, td);
         contentValues.put(tagColor, tc);
 
-        db.insert(tagTable,null, contentValues);
+        long xys=db.insert(tagTable,null, contentValues);
     }
 
     public ArrayList<TagModel> fetchAllTags(){

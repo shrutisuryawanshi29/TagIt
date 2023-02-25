@@ -37,10 +37,27 @@
             android:textColor="@color/colorOneDark"/>
     </LinearLayout>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_tags_et"
+        android:layout_margin="18dp"
+        android:hint="Search Tags"
+        android:textColorHint="@color/colorTwoLight"
+        android:textColor="@color/colorOneDark"
+        android:backgroundTint="@color/colorTwoLight" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:text="Click on the tags for details"
+        android:textColor="@color/colorOneDark"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="10dp"
         android:id="@+id/list_tags_recycler_view"/>
 
