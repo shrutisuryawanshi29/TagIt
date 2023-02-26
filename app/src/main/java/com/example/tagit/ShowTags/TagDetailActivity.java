@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.tagit.Database.DBHandler;
 import com.example.tagit.Models.TagEventsModel;
+import com.example.tagit.Models.TagModel;
 import com.example.tagit.R;
 
 import java.text.DateFormat;
@@ -50,6 +51,7 @@ public class TagDetailActivity extends AppCompatActivity implements View.OnClick
     String[] colorArray = new String[]{"78AD92", "A0C3D2", "78ADAC", "7893AD", "9278AD", "C3B091", "EAC7C7", "DBC970", "E6BA95", "FFAB91"};
 
     String selectedTagName;
+    TagModel selectedTagModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,8 @@ public class TagDetailActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_tag_detail);
 
         dbHandler = new DBHandler(this);
-        Intent intent = getIntent();
-        selectedTagName = intent.getStringExtra("selectedTagName");
+        selectedTagModel = (TagModel) getIntent().getSerializableExtra("selectedTagName");
+        selectedTagName = selectedTagModel.getTagName();
         setIdsForViews();
         fetchTagDetails();
         setDataForViews();
@@ -137,9 +139,11 @@ public class TagDetailActivity extends AppCompatActivity implements View.OnClick
             setValuesInSelectedArray(position);
             setAdapterData();
         } else {
-            setDyanamicStatusBarColor(colorArray[0]);
-            listTagsLL.setBackgroundColor(Color.parseColor("#" + colorArray[0]));
-            setValuesInSelectedArray(0);
+            setDyanamicStatusBarColor(selectedTagModel.getTagColor());
+            listTagsLL.setBackgroundColor(Color.parseColor("#" + selectedTagModel.getTagColor()));
+            addDescriptionET.setText(selectedTagModel.getTagDescription());
+            int position = Arrays.asList(colorArray).indexOf(selectedTagModel.getTagColor());
+            setValuesInSelectedArray(position);
         }
     }
 
@@ -239,7 +243,6 @@ public class TagDetailActivity extends AppCompatActivity implements View.OnClick
         for (int i = 0; i < isColorSelectedArray.length; i++) {
             if (isColorSelectedArray[i]) return i;
         }
-
         return 0;
     }
 

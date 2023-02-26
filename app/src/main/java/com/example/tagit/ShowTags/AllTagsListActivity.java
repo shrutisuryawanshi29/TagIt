@@ -118,9 +118,9 @@ public class AllTagsListActivity extends AppCompatActivity implements OnTagClick
         Intent intent = new Intent(this, TagDetailActivity.class);
 
         if (temp.size()>0) // if click on filtered list
-            intent.putExtra("selectedTagName", temp.get(position).getTagName());
+            intent.putExtra("selectedTagName", temp.get(position));
         else
-            intent.putExtra("selectedTagName", tagModelArrayList.get(position).getTagName());
+            intent.putExtra("selectedTagName", tagModelArrayList.get(position));
 
         startActivity(intent);
     }

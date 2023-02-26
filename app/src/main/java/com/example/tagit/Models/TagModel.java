@@ -1,6 +1,8 @@
 package com.example.tagit.Models;
 
-public class TagModel {
+import java.io.Serializable;
+
+public class TagModel implements Serializable {
     String tagName, tagDescription, tagColor;
 
     public TagModel(String tagName, String tagDescription, String tagColor) {
