@@ -52,6 +52,8 @@ public class AddTagDialog extends Dialog implements View.OnClickListener, OnTagC
             if (!tagName.isEmpty() && !checkIfDataAlreadyExist(tagName)) {
                 dbHandler.addNewTagIntoTable(tagName.trim(), "", "78AD92");
                 Toast.makeText(activity, "Tag Created!", Toast.LENGTH_SHORT).show();
+                tagModelArrayList.add(new TagModel(tagName.trim(), "", "78AD92"));
+                addTagAdapter.notifyDataSetChanged();
             }
         });
 

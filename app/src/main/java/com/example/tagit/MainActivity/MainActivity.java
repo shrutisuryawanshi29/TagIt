@@ -110,6 +110,12 @@ public class MainActivity extends AppCompatActivity implements OnTagClickListene
                         dialog.cancel();
                     }
                 });
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                setCalenderData();
+            }
+        });
         AlertDialog alert = builder.create();
         alert.show();
     }
